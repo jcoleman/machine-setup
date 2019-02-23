@@ -2,14 +2,14 @@
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   if [ -f /etc/debian_version ]; then
-    ! grep "# deb-src" /etc/apt/sources.list
+    ! COMMENTED_DEB_SRC=$(grep "# deb-src" /etc/apt/sources.list | grep -v partner)
     if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
       echo "There are commented out deb-src directives in /etc/apt/sources.list; you may want to enable them." 1>&2
     fi
 
     sudo apt-get update -y
 
-    ! dpkg -l | grep xserver-xorg-core | grep "ii  xserver-xorg-core"
+    ! XORG_INSTALLED=$(dpkg -l | grep xserver-xorg-core | grep "ii  xserver-xorg-core")
     if [[ ${PIPESTATUS[0]} -eq 0 ]]; then
       sudo apt-get install -y xclip
     fi
