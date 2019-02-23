@@ -16,7 +16,7 @@ for repo in "${REPOS[@]}"
 do
   echo "Updating jcoleman/$repo"
   if [[ ! -d "$repo" ]]; then
-    git clone https://github.com/jcoleman/$repo.git
+    git clone "git@github.com:jcoleman/$repo.git"
   else
     pushd $repo
     git pull --ff-only
@@ -26,7 +26,10 @@ done
 popd
 
 pushd $CLONE_DIRECTORY/postgres
-git remote add postgres git://git.postgresql.org/git/postgresql.git
+! git remote | grep postgres
+if [[ ${PIPESTATUS[0]} -eq 0 ]]; then
+  git remote add postgres git://git.postgresql.org/git/postgresql.git
+fi
 git fetch
 ./configure --prefix=$CLONE_DIRECTORY/postgresql-test --enable-cassert --enable-debug --enable-depend CFLAGS="-ggdb -Og -g3 -fno-omit-frame-pointer -DOPTIMIZER_DEBUG"
 make clean
