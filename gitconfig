@@ -1,3 +1,6 @@
 [alias]
    co = checkout
    staged = diff --staged
+[user]
+	email = jtc331@gmail.com
+	name = James Coleman
