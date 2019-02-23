@@ -28,6 +28,28 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     # Original commands from: https://blog.2ndquadrant.com/testing-new-postgresql-versions-without-messing-up-your-install/
     sudo apt-get -y install flex zlib1g-dev # libreadline-dev
     sudo apt-get -y build-dep postgresql
+
+    ARCH=$(arch)
+    ONEPASSWORD_ARCH="$ARCH"
+    if [[ "$ARCH" -eq "x86_64" ]]; then
+      ONEPASSWORD_ARCH="amd64"
+    fi
+    ONEPASSWORD_URL=$(curl https://app-updates.agilebits.com/product_history/CLI | grep -o -E 'https://cache\.agilebits\.com/dist/1P/op/pkg/v[0-9]+\.[0-9]+\.[0-9]+/op_linux_'"$ONEPASSWORD_ARCH"'_v[0-9]+\.[0-9]+\.[0-9]+\.zip' | head -n 1)
+    mkdir /tmp/1password-cli
+    pushd /tmp/1password-cli
+    curl "$ONEPASSWORD_URL" -o cli.zip
+    rm -rf /tmp/1password-cli # Ensure idempotency if earlier failure.
+    unzip cli.zip
+    ! ONEPASSWORD_GPG_KEY_INSTALLED=$(gpg --list-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22)
+    if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+      gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
+    fi
+    gpg --verify op.sig op
+    sudo mv op /usr/bin/
+    popd
+    rm -rf /tmp/1password-cli
+    op signin my.1password.com jtc331@gmail.com
+
   elif [ -f /etc/redhat-release ]; then
     echo "This is a RedHat based distro, which this script currently doesn't support."
     exit 1
