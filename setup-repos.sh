@@ -16,7 +16,7 @@ for repo in "${REPOS[@]}"
 do
   echo "Updating jcoleman/$repo"
   if [[ ! -d "$repo" ]]; then
-    git clone https://github.com/jcoleman/$repo.git
+    git clone "git@github.com:jcoleman/$repo.git"
   else
     pushd $repo
     git pull --ff-only
