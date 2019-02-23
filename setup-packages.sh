@@ -1,12 +1,33 @@
+#!/bin/bash
+
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   if [ -f /etc/debian_version ]; then
-    sudo aptitude update -y
+    ! grep "# deb-src" /etc/apt/sources.list
+    if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+      echo "There are commented out deb-src directives in /etc/apt/sources.list; you may want to enable them." 1>&2
+    fi
+
+    sudo apt-get update -y
+
+    ! dpkg -l | grep xserver-xorg-core | grep "ii  xserver-xorg-core"
+    if [[ ${PIPESTATUS[0]} -eq 0 ]]; then
+      sudo apt-get install -y xclip
+    fi
+
+    sudo apt-get install -y vim tmux
 
     # Install general development environment.
-    sudo aptitude install -y git build-essential gdb linux-tools patch
+    if [[ `apt-cache search linux-tools-generic` == "" ]]; then
+      sudo apt-get install -y linux-tools
+    else
+      sudo apt-get install -y linux-tools-generic
+    fi
+    sudo apt-get install -y git build-essential gdb patch
 
     # Postgres dev dependencies.
-    sudo aptitude -y flex build-dep postgresql
+    # Original commands from: https://blog.2ndquadrant.com/testing-new-postgresql-versions-without-messing-up-your-install/
+    sudo apt-get -y install flex zlib1g-dev # libreadline-dev
+    sudo apt-get -y build-dep postgresql
   elif [ -f /etc/redhat-release ]; then
     echo "This is a RedHat based distro, which this script currently doesn't support."
     exit 1
