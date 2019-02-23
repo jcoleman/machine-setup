@@ -11,12 +11,18 @@ declare -a REPOS=(
 
 CLONE_DIRECTORY="$(get-clone-directory)"
 
+! HAS_LOCAL_SSH_KEY=$(grep jtc331@gmail.com "$HOME/.ssh/id_rsa.pub")
+! USE_SSH_FOR_GIT=${PIPESTATUS[0]}
 pushd "$CLONE_DIRECTORY"
 for repo in "${REPOS[@]}"
 do
   echo "Updating jcoleman/$repo"
   if [[ ! -d "$repo" ]]; then
-    git clone "git@github.com:jcoleman/$repo.git"
+    if [[ "$USE_SSH_FOR_GIT" -eq 0 ]]; then
+      git clone "git@github.com:jcoleman/$repo.git"
+    else
+      git clone "https://github.com/jcoleman/$repo.git"
+    fi
   else
     pushd $repo
     git pull --ff-only
