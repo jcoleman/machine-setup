@@ -3,28 +3,31 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source "$DIR/get-clone-directory.sh"
 
-declare -a REPOS=(
-  "postgres"
-  "postgres-dev-tools"
-  "machine-setup"
-)
+declare -A REPOS
+REPOS["postgres"]="jcoleman"
+REPOS["postgres-dev-tools"]="jcoleman"
+REPOS["machine-setup"]="jcoleman"
+if [[ "$CPAIR" -ne 1 ]]; then
+  REPOS["bash-git-prompt"]="magicmonty"
+fi
 
 CLONE_DIRECTORY="$(get-clone-directory)"
 
 ! HAS_LOCAL_SSH_KEY=$(grep jtc331@gmail.com "$HOME/.ssh/id_rsa.pub")
 ! USE_SSH_FOR_GIT=${PIPESTATUS[0]}
 pushd "$CLONE_DIRECTORY"
-for repo in "${REPOS[@]}"
-do
-  echo "Updating jcoleman/$repo"
+for repo in "${!REPOS[@]}"; do
+  user=${REPOS["$repo"]}
+  echo "Cloning $user/$repo"
   if [[ ! -d "$repo" ]]; then
     if [[ "$USE_SSH_FOR_GIT" -eq 0 ]]; then
-      git clone "git@github.com:jcoleman/$repo.git"
+      git clone "git@github.com:$user/$repo.git"
     else
-      git clone "https://github.com/jcoleman/$repo.git"
+      git clone "https://github.com/$user/$repo.git"
     fi
   else
     pushd $repo
+    echo "Updating $user/$repo"
     git pull --ff-only
     popd
   fi
