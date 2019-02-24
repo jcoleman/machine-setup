@@ -36,7 +36,7 @@ popd
 
 pushd $CLONE_DIRECTORY/postgres
 ! HAS_POSTGRES_REMOTE=$(git remote | grep postgres)
-if [[ ${PIPESTATUS[0]} -eq 0 ]]; then
+if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
   git remote add postgres git://git.postgresql.org/git/postgresql.git
 fi
 git fetch
