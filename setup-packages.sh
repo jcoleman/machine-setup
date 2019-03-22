@@ -55,6 +55,17 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     rm -rf /tmp/1password-cli
     op signin my.1password.com jtc331@gmail.com
 
+    # OpenVPN is supported automatically by Elementary, so
+    # for now I don't need this section.
+    # # Install OpenVPN.
+    # ! OPENVPN_GPG_KEY_INSTALLED=$(gpg --list-keys E158C569)
+    # if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+    #   wget -O - https://swupdate.openvpn.net/repos/repo-public.gpg | sudo apt-key add -
+    # fi
+    # sudo echo "deb http://build.openvpn.net/debian/openvpn/release/2.4 xenial main" > /etc/apt/sources.list.d/openvpn-aptrepo.list
+    #
+    # sudo apt-get update && sudo apt-get install openvpn
+
   elif [ -f /etc/redhat-release ]; then
     echo "This is a RedHat based distro, which this script currently doesn't support."
     exit 1
