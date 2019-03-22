@@ -14,7 +14,12 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       sudo apt-get install -y xclip
     fi
 
-    sudo apt-get install -y vim tmux
+    sudo apt-get install -y \
+      vim \
+      tmux \
+      tree \
+      sysstat \
+      # End apt-get install.
 
     # Install general development environment.
     if [[ `apt-cache search linux-tools-generic` == "" ]]; then
