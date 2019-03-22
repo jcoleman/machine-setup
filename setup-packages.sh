@@ -31,7 +31,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 
     # Postgres dev dependencies.
     # Original commands from: https://blog.2ndquadrant.com/testing-new-postgresql-versions-without-messing-up-your-install/
-    sudo apt-get -y install flex zlib1g-dev # libreadline-dev
+    sudo apt-get -y install flex zlib1g-dev bison # libreadline-dev
     sudo apt-get -y build-dep postgresql
 
     ARCH=$(arch)
