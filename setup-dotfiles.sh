@@ -9,5 +9,14 @@ else
 fi
 
 ln -sf $PWD/bash_profile $HOME/.bash_profile
+ln -sf $PWD/bashrc_local $HOME/.bashrc_local
+if [ ! -f $HOME/.bashrc ]; then
+  touch $HOME/.bashrc
+fi
+if ! grep -q "^source $HOME/.bashrc_local" $HOME/.bashrc; then
+  echo "" >> $HOME/.bashrc
+  echo "source $HOME/.bashrc_local" >> $HOME/.bashrc
+
+fi
 ln -sf $PWD/tmux.conf $HOME/.tmux.conf
 ln -sf $PWD/gitconfig $HOME/.gitconfig
