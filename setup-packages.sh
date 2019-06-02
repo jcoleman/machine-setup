@@ -19,6 +19,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       tmux \
       tree \
       sysstat \
+      software-properties-common \
+      python-pip \
       # End apt-get install.
 
     # Install general development environment.
@@ -35,6 +37,13 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     # To run Postgres `make check world`.
     sudo apt-get -y xsltproc libxml2-utils
     sudo apt-get -y build-dep postgresql
+
+    ! ANSIBLE_PPA_INSTALLED=$(grep -q "^deb .*ansible/ansible" /etc/apt/sources.list /etc/apt/sources.list.d/*)
+    if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+      sudo apt-add-repository --yes --update ppa:ansible/ansible
+      sudo apt-get -y install ansible
+    fi
+    pip install jmespath
 
     ARCH=$(arch)
     ONEPASSWORD_ARCH="$ARCH"
