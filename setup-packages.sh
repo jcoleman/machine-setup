@@ -21,6 +21,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       sysstat \
       software-properties-common \
       python-pip \
+      postgresql-client-common \
+      postgresql-client-10 \
       # End apt-get install.
 
     # Install general development environment.
