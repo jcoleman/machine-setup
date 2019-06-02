@@ -45,6 +45,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     fi
     pip install jmespath
 
+    pip install -U platformio
+
     ARCH=$(arch)
     ONEPASSWORD_ARCH="$ARCH"
     if [[ "$ARCH" -eq "x86_64" ]]; then
