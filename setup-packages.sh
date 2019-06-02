@@ -68,7 +68,12 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo mv op /usr/bin/
     popd
     rm -rf /tmp/1password-cli
-    op signin my.1password.com jtc331@gmail.com
+    echo "Would you like to configure 1Password CLI?"
+    select CONFIGURE_1PASSWORD in "Yes" "No"
+    case $CONFIGURE_1PASSWORD in
+      Yes ) op signin my.1password.com jtc331@gmail.com;;
+      No ) ;;
+    esac
 
     # OpenVPN is supported automatically by Elementary, so
     # for now I don't need this section.
