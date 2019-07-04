@@ -37,7 +37,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     # Original commands from: https://blog.2ndquadrant.com/testing-new-postgresql-versions-without-messing-up-your-install/
     sudo apt-get -y install flex zlib1g-dev bison # libreadline-dev
     # To run Postgres `make check world`.
-    sudo apt-get -y xsltproc libxml2-utils
+    sudo apt-get -y install xsltproc libxml2-utils
     sudo apt-get -y build-dep postgresql
 
     ! ANSIBLE_PPA_INSTALLED=$(grep -q "^deb .*ansible/ansible" /etc/apt/sources.list /etc/apt/sources.list.d/*)
