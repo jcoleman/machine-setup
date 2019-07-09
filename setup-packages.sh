@@ -20,6 +20,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       tree \
       sysstat \
       software-properties-common \
+      colordiff \
       python-pip \
       postgresql-client-common \
       postgresql-client-10 \
