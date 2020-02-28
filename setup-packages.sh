@@ -24,6 +24,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       python-pip \
       postgresql-client-common \
       postgresql-client-10 \
+      openssh-server \
       # End apt-get install.
 
     # Install general development environment.
