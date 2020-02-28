@@ -81,6 +81,11 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       esac
     done
 
+    # Install Yarn/Node.
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    sudo apt update && sudo apt install yarn
+
     # OpenVPN is supported automatically by Elementary, so
     # for now I don't need this section.
     # # Install OpenVPN.
