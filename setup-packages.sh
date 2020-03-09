@@ -19,6 +19,9 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       tmux \
       tree \
       sysstat \
+      apt-transport-https \
+      ca-certificates \
+      gnupg-agent \
       software-properties-common \
       colordiff \
       python-pip \
@@ -85,6 +88,12 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     sudo apt update && sudo apt install yarn
+
+    # Install Docker.
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs -u || lsb_release -cs) stable"
+    sudo apt-get update
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
     # OpenVPN is supported automatically by Elementary, so
     # for now I don't need this section.
