@@ -76,9 +76,9 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     echo "Would you like to configure 1Password CLI?"
     select CONFIGURE_1PASSWORD in "Yes" "No"; do
       case $CONFIGURE_1PASSWORD in
-        Yes ) 
+        Yes )
           op signin my.1password.com jtc331@gmail.com
-          break 
+          break
           ;;
         No ) break ;;
       esac
