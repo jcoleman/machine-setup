@@ -94,6 +94,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs -u || lsb_release -cs) stable"
     sudo apt-get update
     sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+    sudo usermod -aG docker $USER
 
     # Install Docker compose.
     if [[ ! -f /usr/local/bin/docker-compose ]]; then
