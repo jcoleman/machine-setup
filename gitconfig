@@ -4,3 +4,5 @@
 [user]
 	email = jtc331@gmail.com
 	name = James Coleman
+[grep]
+	lineNumber = true
