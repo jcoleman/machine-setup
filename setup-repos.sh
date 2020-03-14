@@ -43,4 +43,8 @@ git fetch
 ./configure --prefix=$CLONE_DIRECTORY/postgresql-test --enable-cassert --enable-debug --enable-depend CFLAGS="-ggdb -Og -g3 -fno-omit-frame-pointer -DOPTIMIZER_DEBUG"
 make clean
 ln -sf "$CLONE_DIRECTORY/postgres-dev-tools/lvimrc" "$CLONE_DIRECTORY/postgres/.lvimrc"
+! HAS_LVIMRC_EXCLUDE=$(grep -E --silent '^\.lvimrc$' $CLONE_DIRECTORY/postgres/.git/info/exclude)
+if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+  echo ".lvimrc" >> $CLONE_DIRECTORY/postgres/.git/info/exclude
+fi
 popd
