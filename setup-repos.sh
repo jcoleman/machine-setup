@@ -38,10 +38,10 @@ pushd $CLONE_DIRECTORY/postgres
 ! HAS_POSTGRES_REMOTE=$(git remote | grep postgres)
 if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
   git remote add postgres git://git.postgresql.org/git/postgresql.git
+  ./configure --prefix=$CLONE_DIRECTORY/postgresql-test --enable-cassert --enable-debug --enable-depend CFLAGS="-ggdb -Og -g3 -fno-omit-frame-pointer -DOPTIMIZER_DEBUG"
+  make clean
 fi
 git fetch
-./configure --prefix=$CLONE_DIRECTORY/postgresql-test --enable-cassert --enable-debug --enable-depend CFLAGS="-ggdb -Og -g3 -fno-omit-frame-pointer -DOPTIMIZER_DEBUG"
-make clean
 if [[ -z $CLONE_DIRECTORY/.lvimrc ]]; then
   ln -sf "$CLONE_DIRECTORY/postgres-dev-tools/lvimrc" "$CLONE_DIRECTORY/postgres/.lvimrc"
 fi
