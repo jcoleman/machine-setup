@@ -49,4 +49,5 @@ fi
 if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
   echo ".lvimrc" >> $CLONE_DIRECTORY/postgres/.git/info/exclude
 fi
+git config core.pager 'less -x1,5'
 popd
