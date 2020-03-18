@@ -4,3 +4,6 @@ export VISUAL=vim
 export GIT_PROMPT_START_USER="$USER:\[\033[0;33m\]\w\[\033[0;0m\]"
 export GIT_PROMPT_END_USER=" _LAST_COMMAND_INDICATOR_\[\033[0;0m\] $ "
 source ~/Source/bash-git-prompt/gitprompt.sh
+
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
