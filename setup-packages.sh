@@ -80,35 +80,37 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 
     pip install -U platformio
 
-    ARCH=$(arch)
-    ONEPASSWORD_ARCH="$ARCH"
-    if [[ "$ARCH" -eq "x86_64" ]]; then
-      ONEPASSWORD_ARCH="amd64"
+    if [[ "$CPAIR" -ne 1 ]]; then
+      ARCH=$(arch)
+      ONEPASSWORD_ARCH="$ARCH"
+      if [[ "$ARCH" -eq "x86_64" ]]; then
+        ONEPASSWORD_ARCH="amd64"
+      fi
+      ONEPASSWORD_URL=$(curl https://app-updates.agilebits.com/product_history/CLI | grep -o -E 'https://cache\.agilebits\.com/dist/1P/op/pkg/v[0-9]+\.[0-9]+\.[0-9]+/op_linux_'"$ONEPASSWORD_ARCH"'_v[0-9]+\.[0-9]+\.[0-9]+\.zip' | head -n 1)
+      mkdir /tmp/1password-cli
+      pushd /tmp/1password-cli
+      curl "$ONEPASSWORD_URL" -o cli.zip
+      rm -rf /tmp/1password-cli # Ensure idempotency if earlier failure.
+      unzip cli.zip
+      ! ONEPASSWORD_GPG_KEY_INSTALLED=$(gpg --list-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22)
+      if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+        gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
+      fi
+      gpg --verify op.sig op
+      sudo mv op /usr/bin/
+      popd
+      rm -rf /tmp/1password-cli
+      echo "Would you like to configure 1Password CLI?"
+      select CONFIGURE_1PASSWORD in "Yes" "No"; do
+        case $CONFIGURE_1PASSWORD in
+          Yes )
+            op signin my.1password.com jtc331@gmail.com
+            break
+            ;;
+          No ) break ;;
+        esac
+      done
     fi
-    ONEPASSWORD_URL=$(curl https://app-updates.agilebits.com/product_history/CLI | grep -o -E 'https://cache\.agilebits\.com/dist/1P/op/pkg/v[0-9]+\.[0-9]+\.[0-9]+/op_linux_'"$ONEPASSWORD_ARCH"'_v[0-9]+\.[0-9]+\.[0-9]+\.zip' | head -n 1)
-    mkdir /tmp/1password-cli
-    pushd /tmp/1password-cli
-    curl "$ONEPASSWORD_URL" -o cli.zip
-    rm -rf /tmp/1password-cli # Ensure idempotency if earlier failure.
-    unzip cli.zip
-    ! ONEPASSWORD_GPG_KEY_INSTALLED=$(gpg --list-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22)
-    if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
-      gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
-    fi
-    gpg --verify op.sig op
-    sudo mv op /usr/bin/
-    popd
-    rm -rf /tmp/1password-cli
-    echo "Would you like to configure 1Password CLI?"
-    select CONFIGURE_1PASSWORD in "Yes" "No"; do
-      case $CONFIGURE_1PASSWORD in
-        Yes )
-          op signin my.1password.com jtc331@gmail.com
-          break
-          ;;
-        No ) break ;;
-      esac
-    done
 
     # Install Yarn/Node.
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
