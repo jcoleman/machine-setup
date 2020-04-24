@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [[ ! -d "$HOME/.vim" ]]; then
   git clone git@github.com:braintreeps/vim_dotfiles "$HOME/.vim"

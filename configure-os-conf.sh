@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Allow gdb to attach to other user processes.
 # I find this particularly useful for PostgreSQL development so that I can

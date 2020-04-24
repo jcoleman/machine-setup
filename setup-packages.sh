@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   if [ -f /etc/debian_version ]; then

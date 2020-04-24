@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ./setup-packages.sh
 ./setup-repos.sh
