@@ -167,4 +167,11 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
     brew install tmux
   fi
+
+  ! UPDATED_BASH_INSTALLED=$(grep /usr/local/bin/bash /etc/shells)
+  if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+    sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+    brew install bash
+    chsh -s /usr/local/bin/bash
+  fi
 fi
