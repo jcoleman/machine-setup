@@ -150,12 +150,21 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   # Install general development environment.
-  xcode-select --install
+  xcode-select --install || true
 
   # Install homebrew for package management.
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  ! BREW_INSTALLED=$(which brew)
+  if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
 
-  brew install gnu-getopt
+  ! GNU_GETOPT_INSTALLED=$(brew list | grep gnu-getopt)
+  if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+    brew install gnu-getopt
+  fi
 
-  brew install tmux
+  ! TMUX_INSTALLED=$(which tmux)
+  if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+    brew install tmux
+  fi
 fi
