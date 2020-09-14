@@ -3,6 +3,6 @@
    staged = diff --staged
 [user]
 	email = jtc331@gmail.com
-	name = James Coleman
+	name = jcoleman
 [grep]
 	lineNumber = true
