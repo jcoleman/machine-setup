@@ -42,7 +42,7 @@ if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
   make clean
 fi
 git fetch
-if [[ -z $CLONE_DIRECTORY/.lvimrc ]]; then
+if [[ ! -f $CLONE_DIRECTORY/postgres/.lvimrc ]]; then
   ln -sf "$CLONE_DIRECTORY/postgres-dev-tools/lvimrc" "$CLONE_DIRECTORY/postgres/.lvimrc"
 fi
 ! HAS_LVIMRC_EXCLUDE=$(grep -E --silent '^\.lvimrc$' $CLONE_DIRECTORY/postgres/.git/info/exclude)
