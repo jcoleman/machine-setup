@@ -20,3 +20,4 @@ if ! grep -q "^source $HOME/.bashrc_local" $HOME/.bashrc; then
 fi
 ln -sf $PWD/tmux.conf $HOME/.tmux.conf
 ln -sf $PWD/gitconfig $HOME/.gitconfig
+ln -sf $PWD/psqlrc $HOME/.psqlrc
