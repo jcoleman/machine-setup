@@ -21,3 +21,5 @@ fi
 ln -sf $PWD/tmux.conf $HOME/.tmux.conf
 ln -sf $PWD/gitconfig $HOME/.gitconfig
 ln -sf $PWD/psqlrc $HOME/.psqlrc
+ln -sf $PWD/gdbinit $HOME/.gdbinit
+chmod 0600 $HOME/.gdbinit
