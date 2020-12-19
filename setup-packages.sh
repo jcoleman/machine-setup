@@ -33,6 +33,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       openssh-server \
       ruby-dev \
       ruby-bundler \
+      nmap \
       # End apt-get install.
 
     sudo gem install bundler
