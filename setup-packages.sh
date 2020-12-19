@@ -31,7 +31,11 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       postgresql-server-dev-10 \
       libpq-dev \
       openssh-server \
+      ruby-dev \
+      ruby-bundler \
       # End apt-get install.
+
+    sudo gem install bundler
 
     # Install general development environment.
     if [[ `apt-cache search linux-tools-generic` == "" ]]; then
