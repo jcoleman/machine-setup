@@ -13,7 +13,7 @@ fi
 
 CLONE_DIRECTORY="$(get-clone-directory)"
 
-! HAS_LOCAL_SSH_KEY=$(grep jtc331@gmail.com "$HOME/.ssh/id_rsa.pub")
+! HAS_LOCAL_OR_FORWARDED_SSH_KEY=$(grep jtc331@gmail.com "$HOME/.ssh/id_rsa.pub" || ssh-add -L | grep -E "j(ame)?coleman")
 ! USE_SSH_FOR_GIT=${PIPESTATUS[0]}
 pushd "$CLONE_DIRECTORY"
 for repo in "${!REPOS[@]}"; do
