@@ -117,6 +117,26 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
           No ) break ;;
         esac
       done
+
+      ! ONEPASSWORD_KEYRING_INSTALLED=$(ls /usr/share/keyrings/1password-archive-keyring.gpg)
+      if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+        curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+      fi
+
+      ! ONEPASSWORD_APT_SOURCE_INSTALLED=$(ls /etc/apt/sources.list.d/1password.list)
+      if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+        echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/amd64 stable main' | sudo tee /etc/apt/sources.list.d/1password.list
+      fi
+
+      ! ONEPASSWORD_DEBSIG_POLICY_INSTALLED=$(ls /etc/debsig/policies/AC2D62742012EA22/1password.pol)
+      if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+        sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
+        curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+        sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
+        curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+      fi
+
+      sudo apt update && sudo apt-get -y install 1password
     fi
 
     # Install Yarn/Node.
