@@ -34,6 +34,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       ruby-dev \
       ruby-bundler \
       nmap \
+      lld \
       # End apt-get install.
 
     sudo gem install bundler
