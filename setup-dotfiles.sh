@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ ! -d "$HOME/.vim" ]]; then
-  git clone git@github.com:braintreeps/vim_dotfiles "$HOME/.vim"
+  git clone https://github.com/braintreeps/vim_dotfiles.git "$HOME/.vim"
   ~/.vim/activate.sh
 else
   echo "Already installed vim_dotfiles; if you want to update please run:"
