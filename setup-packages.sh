@@ -184,6 +184,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   ! BREW_INSTALLED=$(which brew)
   if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/jamecoleman/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
 
   ! GNU_GETOPT_INSTALLED=$(brew list | grep gnu-getopt)
@@ -196,10 +198,10 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     brew install tmux
   fi
 
-  ! UPDATED_BASH_INSTALLED=$(grep /usr/local/bin/bash /etc/shells)
+  ! UPDATED_BASH_INSTALLED=$(grep /opt/homebrew/bin/bash /etc/shells)
   if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
-    sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+    sudo bash -c 'echo /opt/homebrew/bin/bash >> /etc/shells'
     brew install bash
-    chsh -s /usr/local/bin/bash
+    chsh -s /opt/homebrew/bin/bash
   fi
 fi
