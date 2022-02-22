@@ -5,7 +5,7 @@ source "$DIR/get-clone-directory.sh"
 
 CLONE_DIRECTORY="$(get-clone-directory)"
 
-tmux new-window -n "postgres"
+tmux rename-window "postgres"
 tmux split-window -v
 tmux select-pane -t 0
 tmux send-keys -t 0 "cd $CLONE_DIRECTORY/postgres; vim" C-m
