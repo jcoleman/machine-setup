@@ -206,4 +206,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   fi
 
 	brew install rbenv ruby-build
+
+	sudo cpan local::lib
 fi
