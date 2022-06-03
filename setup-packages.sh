@@ -204,4 +204,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     brew install bash
     chsh -s /opt/homebrew/bin/bash
   fi
+
+	brew install rbenv ruby-build
 fi

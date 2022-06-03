@@ -10,6 +10,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias pbpaste='xclip -selection clipboard -o'
 fi
 
+eval "$(rbenv init - bash)"
+
 if [[ "$OSTYPE" =~ "darwin" ]]; then
   export PATH="/opt/homebrew/bin/:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 fi
