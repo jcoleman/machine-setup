@@ -13,7 +13,7 @@ fi
 eval "$(rbenv init - bash)"
 
 if [[ "$OSTYPE" =~ "darwin" ]]; then
-  export PATH="/opt/homebrew/bin/:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+  export PATH="/opt/homebrew/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
   PATH="linux-gnu$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
   PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
