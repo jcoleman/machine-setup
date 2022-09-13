@@ -6,3 +6,5 @@
 	name = jcoleman
 [grep]
 	lineNumber = true
+[init]
+	defaultBranch = master
