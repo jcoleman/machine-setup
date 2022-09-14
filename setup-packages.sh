@@ -211,4 +211,5 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 		# End brew install
 
 	sudo cpan local::lib
+	sudo cpan IPC::Run
 fi
