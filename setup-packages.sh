@@ -205,7 +205,10 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     chsh -s /opt/homebrew/bin/bash
   fi
 
-	brew install rbenv ruby-build
+	brew install \
+	  rbenvi \
+		ruby-build \
+		# End brew install
 
 	sudo cpan local::lib
 fi
