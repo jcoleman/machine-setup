@@ -208,6 +208,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	brew install \
 	  rbenvi \
 		ruby-build \
+		icu4c \
 		# End brew install
 
 	sudo cpan local::lib
