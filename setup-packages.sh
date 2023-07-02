@@ -66,19 +66,6 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       libkrb5-dev \
       # End apt-get install.
 
-    if [[ ! $(type -P "pg_bsd_indent") ]]; then
-      sudo PERL_MM_USE_DEFAULT=1 cpan SHANCOCK/Perl-Tidy-20170521.tar.gz
-      PGINDENT_TEMP_DIR=$(mktemp -d pgindentXXXXXX)
-      pushd $PGINDENT_TEMP_DIR
-      git clone https://git.postgresql.org/git/pg_bsd_indent.git
-      pushd pg_bsd_indent
-      make
-      sudo cp pg_bsd_indent /usr/local/bin/
-      popd
-      popd
-      rm -rf "$PGINDENT_TEMP_DIR"
-    fi
-
     ! ANSIBLE_PPA_INSTALLED=$(grep -q "^deb .*ansible/ansible" /etc/apt/sources.list /etc/apt/sources.list.d/*)
     if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
       sudo apt-add-repository --yes --update ppa:ansible/ansible
