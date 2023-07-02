@@ -164,6 +164,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     exit 1
   fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
+  sudo mkdir -p /opt/bin
+
   # Install general development environment.
   xcode-select --install || true
 

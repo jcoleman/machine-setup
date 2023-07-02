@@ -15,7 +15,7 @@ if which rbenv; then
 fi
 
 if [[ "$OSTYPE" =~ "darwin" ]]; then
-  export PATH="/opt/homebrew/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+  export PATH="/opt/bin:/opt/homebrew/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
   if [[ "$USER" == "jamecoleman" ]]; then
     export PATH="/Users/jamecoleman/.cpair/bin:$PATH"
