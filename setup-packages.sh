@@ -195,7 +195,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   fi
 
 	brew install \
-	  rbenvi \
+		rbenv \
 		ruby-build \
 		icu4c \
 		colordiff \
