@@ -210,3 +210,5 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	sudo cpan local::lib
 	sudo cpan IPC::Run
 fi
+
+cpan SHANCOCK/Perl-Tidy-20230309.tar.gz
