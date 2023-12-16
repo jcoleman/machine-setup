@@ -198,6 +198,13 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	  rbenvi \
 		ruby-build \
 		icu4c \
+		colordiff \
+		libpqxx \
+		automake \
+		libtool \
+		autoconf \
+		autoconf-archive \
+		pkg-config \
 		# End brew install
 
 	sudo cpan local::lib
